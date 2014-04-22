@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"require": {
 		"fkooman/guzzle-bearer-auth-plugin": "0.2.*",
-		"fkooman/php-oauth-client": "dev-master"
+		"fkooman/php-oauth-client": "0.3.*"
 		},
 	"autoload": {
 		"classmap": [
