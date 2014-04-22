@@ -4,7 +4,7 @@
 	"keywords": ["uvicate"],
 	"license": "MIT",
 	"require": {
-		"fkooman/guzzle-bearer-auth-plugin": "dev-master",
+		"fkooman/guzzle-bearer-auth-plugin": "0.2.*",
         "fkooman/php-oauth-client": "dev-master"
 		},
 	"autoload": {
