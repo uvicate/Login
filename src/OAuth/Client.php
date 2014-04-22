@@ -14,8 +14,7 @@ class Client {
 	
 	public function __construct()
 	{
-		$this->authorize_endpoint = $this->url . 'authorize';
-		$this->token_endpoint = $this->url . 'token';
+		$this->setUrl($this->url);
 	}
 
 	public function __get($property)
@@ -41,6 +40,13 @@ class Client {
 	public function getUrl()
 	{
 		return $this->url;
+	}
+
+	public function setUrl($url)
+	{
+		$this->url = $url;
+		$this->authorize_endpoint = $this->url . 'authorize';
+		$this->token_endpoint = $this->url . 'token';
 	}
 
 	public function initialize()
