@@ -14,5 +14,6 @@
 		"psr-0": { 
 			"Uvicate": "src/"
 		 }
-	}
+	},
+	"minimum-stability": "stable"
 }
