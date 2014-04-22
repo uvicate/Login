@@ -3,7 +3,10 @@
 	"description": "uVicate OAuth client.",
 	"keywords": ["uvicate"],
 	"license": "MIT",
-	"require": {},
+	"require": {
+		"fkooman/guzzle-bearer-auth-plugin": "0.2.*",
+		"fkooman/php-oauth-client": "dev-master"
+		},
 	"autoload": {
 		"classmap": [
 			"src/"
