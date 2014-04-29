@@ -65,9 +65,14 @@ class Client {
 		$this->callback = new \fkooman\OAuth\Client\Callback("uvicate", $this->clientConfig, new \fkooman\OAuth\Client\SessionStorage(), new \Guzzle\Http\Client());
 	}
 
-	public function getAccessToken()
+	public function initContext()
 	{
 		$this->context = new \fkooman\OAuth\Client\Context($this->client_id . "@uvicate.com", array("login"));
+	}
+
+	public function getAccessToken()
+	{
+		$this->initContext();
 		return $this->accessToken = $this->api->getAccessToken($this->context);
 	}
 
@@ -78,12 +83,25 @@ class Client {
 
 	public function logout()
 	{
-
+		$this->initContext();
+		$this->api->deleteAccessToken($this->context);
+		$this->api->deleteRefreshToken($this->context);
 	}
 
 	public function verify()
 	{
-		
+		$this->getRequest($this->url . 'credentials');
+	}
+
+	public function getRequest($url)
+	{
+		$accessToken = $this->getAccessToken();
+		$client = new \Guzzle\Http\Client();
+		$bearerAuth = new \fkooman\Guzzle\Plugin\BearerAuth\BearerAuth($accessToken->getAccessToken());
+		$client->addSubscriber($bearerAuth);
+
+		$response = $client->get($url)->send();
+		return $response->json();
 	}
 }
 
