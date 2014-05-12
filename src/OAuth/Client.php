@@ -11,7 +11,7 @@ class Client {
 	public $callback;
 	public $context;
 	public $accessToken;
-	
+
 	public function __construct()
 	{
 		$this->setUrl($this->url);
@@ -96,12 +96,15 @@ class Client {
 	public function getRequest($url)
 	{
 		$accessToken = $this->getAccessToken();
-		$client = new \Guzzle\Http\Client();
-		$bearerAuth = new \fkooman\Guzzle\Plugin\BearerAuth\BearerAuth($accessToken->getAccessToken());
-		$client->addSubscriber($bearerAuth);
+		if($accessToken)
+		{
+			$client = new \Guzzle\Http\Client();
+			$bearerAuth = new \fkooman\Guzzle\Plugin\BearerAuth\BearerAuth($accessToken->getAccessToken());
+			$client->addSubscriber($bearerAuth);
 
-		$response = $client->get($url)->send();
-		return $response->json();
+			$response = $client->get($url)->send();
+			return $response->json();
+		}
 	}
 }
 
